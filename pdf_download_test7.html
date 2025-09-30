@@ -38,8 +38,8 @@
 
                             <script>
                                 window.isChildWindowClosed = true;
-        
-                                function notifyChildWindowClosed() {
+                                
+                                window.notifyChildWindowClosed = () => {
                                     window.isChildWindowClosed = true;
                                 }
         
@@ -58,7 +58,7 @@
                                 function openWindowDirectly() {
                                     showStatus('Opening window immediately...', 'info');
                                     
-                                    const newWindow = window.open('https://www.google.com', '_blank');
+                                    const newWindow = window.open('https://jojoxia1202-blip.github.io/MyTestProject/pdf_download_test7.html', '_blank');
                                     window.isChildWindowClosed = false;
                                     
                                     if (newWindow) {
@@ -82,7 +82,7 @@
                                     setTimeout(() => {
                                         showStatus('Attempting to open window after delay...', 'info');
                                         
-                                        const newWindow = window.open('https://www.google.com', '_blank');
+                                        const newWindow = window.open('https://jojoxia1202-blip.github.io/MyTestProject/pdf_download_test7.html', '_blank');
                                         window.isChildWindowClosed = false;
                                         
                                         if (newWindow) {
