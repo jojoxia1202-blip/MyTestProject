@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Delayed Window.open Test</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    max-width: 600px;
+                                    margin: 50px auto;
+                                    padding: 20px;
+                                }
+                                button {
+                                    padding: 12px 24px;
+                                    margin: 10px;
+                                    font-size: 16px;
+                                    cursor: pointer;
+                                }
+                                #status {
+                                    margin-top: 20px;
+                                    padding: 10px;
+                                    border-radius: 5px;
+                                }
+                                .success { background-color: #d4edda; }
+                                .error { background-color: #f8d7da; }
+                                .info { background-color: #d1ecf1; }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Delayed Window.open Test</h1>
+                            
+                            <button onclick="openWindowDirectly()">Open Immediately</button>
+                            <button onclick="openWindowAfterDelay()">Open After 1500ms Delay</button>
+                            <button onclick="closeWindowDirectly()">Close Immediately</button>
+                            
+                            <div id="status"></div>
+
+                            <script>
+                                window.isChildWindowClosed = true;
+        
+                                function notifyChildWindowClosed() {
+                                    window.isChildWindowClosed = true;
+                                }
+        
+                                function showStatus(message, type) {
+                                    const statusDiv = document.getElementById('status');
+                                    statusDiv.textContent = message;
+                                    statusDiv.className = type;
+                                }
+                
+                                function appendStatus(message, type) {
+                                    const statusDiv = document.getElementById('status');
+                                    statusDiv.textContent += message;
+                                    statusDiv.className = type;
+                                }
+
+                                function openWindowDirectly() {
+                                    showStatus('Opening window immediately...', 'info');
+                                    
+                                    const newWindow = window.open('https://www.google.com', '_blank');
+                                    window.isChildWindowClosed = false;
+                                    
+                                    if (newWindow) {
+                                        showStatus('Window opened successfully! Waiting for window to be closed...', 'success');
+                                        var timer = setInterval(function() {
+                                            if (newWindow.closed || window.isChildWindowClosed) {
+                                                showStatus('Window closed', 'success');
+                                                clearInterval(timer);
+                                            } else {
+                                                appendStatus('check', 'success');
+                                            }
+                                        }, 1000);
+                                    } else {
+                                        showStatus('Window open was blocked.', 'error');
+                                    }
+                                }
+
+                                function openWindowAfterDelay() {
+                                    showStatus('Waiting 1500ms before opening...', 'info');
+                                    
+                                    setTimeout(() => {
+                                        showStatus('Attempting to open window after delay...', 'info');
+                                        
+                                        const newWindow = window.open('https://www.google.com', '_blank');
+                                        window.isChildWindowClosed = false;
+                                        
+                                        if (newWindow) {
+                                            showStatus('Window opened successfully! Waiting for window to be closed...', 'success');
+                                            var timer = setInterval(function() {
+                                                if (newWindow.closed || window.isChildWindowClosed) {
+                                                    showStatus('Window closed', 'success');
+                                                    clearInterval(timer);
+                                                }
+                                            }, 1000);
+                                        } else {
+                                            showStatus('Delayed window open was blocked by iOS.', 'error');
+                                        }
+                                    }, 1500);
+                                }
+
+                                function closeWindowDirectly() {
+                                    showStatus('Closing window immediately...', 'info');
+                                    window.close();
+                                }
+                            </script>
+                        </body>
+                        </html>
