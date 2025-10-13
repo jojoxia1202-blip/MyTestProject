@@ -7,9 +7,26 @@
   <h1>Page B</h1>
   <p>Click below to close this child window and return focus to the parent.</p>
   <button onclick="closeChild()">Close Window</button>
+  <p id="countdown"></p>
 
   <script>
     function closeChild() {
+        let countdown = 3; // seconds
+        const countdownEl = document.getElementById('countdown');
+        countdownEl.textContent = `Closing in ${countdown} seconds...`;
+
+        // Show countdown every second
+        const interval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownEl.textContent = `Closing in ${countdown} seconds...`;
+            } else {
+                countdownEl.textContent = "Closing...";
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        // Your original close logic (unchanged)
         setTimeout(() => {
             window.close();
         }, 3000);
