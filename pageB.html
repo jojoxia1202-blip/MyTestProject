@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page B - Child</title>
+</head>
+<body>
+  <h1>Page B</h1>
+  <p>Click below to close this child window and return focus to the parent.</p>
+  <button onclick="closeChild()">Close Window</button>
+
+  <script>
+    function closeChild() {
+        setTimeout(() => {
+            window.close();
+        }, 3000);
+    }
+  </script>
+</body>
+</html>

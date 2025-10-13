@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parent Window</title>
+  <script>
+    let childWindow = null;
+
+    function openChild() {
+      // Open a new window
+      childWindow = window.open('pageA.html', 'childWindow', 'width=500,height=400');
+
+      // Optional: detect when child is closed
+      const checkChildClosed = setInterval(() => {
+        if (childWindow && childWindow.closed) {
+          clearInterval(checkChildClosed);
+          console.log('Child window was closed');
+        }
+      }, 500);
+    }
+  </script>
+</head>
+<body>
+  <h1>Parent Window</h1>
+  <button onclick="openChild()">Open Child Window (Page A)</button>
+</body>
+</html>
