@@ -6,12 +6,13 @@
 <body>
   <h1>Page A</h1>
   <p>This is the child window.</p>
-  <button onclick="goToPageB()">Go to Page B</button>
+  <button onclick="goToPageB()">Goes to Page B</button>
 
   <script>
     function goToPageB() {
       // Navigate to the next page
-      location.href = 'https://jojoxia1202-blip.github.io/MyTestProject/pageB.html';
+<!--      location.href = 'https://jojoxia1202-blip.github.io/MyTestProject/pageB.html';-->
+        window.open('https://jojoxia1202-blip.github.io/MyTestProject/pageB.html', '_self');
     }
   </script>
 </body>
