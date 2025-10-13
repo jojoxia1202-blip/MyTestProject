@@ -5,14 +5,15 @@
 </head>
 <body>
   <h1>Page A</h1>
-  <p>This is the child window.</p>
+  <p>This is Page A inside the child window iframe.</p>
   <button onclick="goToPageB()">Goes to Page B</button>
 
   <script>
     function goToPageB() {
       // Navigate to the next page
-<!--      location.href = 'https://jojoxia1202-blip.github.io/MyTestProject/pageB.html';-->
-        window.open('https://jojoxia1202-blip.github.io/MyTestProject/pageB.html', '_self');
+      if (window.parent && window.parent.loadPage) {
+          window.parent.loadPage('https://jojoxia1202-blip.github.io/MyTestProject/index.html/pageB.html');
+      }
     }
   </script>
 </body>

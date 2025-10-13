@@ -2,25 +2,43 @@
 <html>
 <head>
   <title>Parent Window</title>
-  <script>
-    let childWindow = null;
-
-    function openChild() {
-      // Open a new window
-      childWindow = window.open('https://jojoxia1202-blip.github.io/MyTestProject/pageA.html', 'childWindow', 'width=500,height=400');
-
-      // Optional: detect when child is closed
-      const checkChildClosed = setInterval(() => {
-        if (childWindow && childWindow.closed) {
-          clearInterval(checkChildClosed);
-          console.log('Child window was closed');
-        }
-      }, 500);
-    }
-  </script>
 </head>
 <body>
   <h1>Parent Window</h1>
-  <button onclick="openChild()">Open Child Window (Page A)</button>
+  <button onclick="openChild()">Open Child Window</button>
+
+  <script>
+    let childWin;
+
+    function openChild() {
+      childWin = window.open('', '_blank', 'width=500,height=400');
+
+      // Initialize the iframe inside the child
+      childWin.document.write(`
+        <html>
+          <head>
+            <title>Child Window</title>
+          </head>
+          <body>
+            <h1>Child Window</h1>
+            <div id="iframeContainer" style="width:100%;height:90%;border:1px solid #ccc;"></div>
+
+            <script>
+              const container = document.getElementById('iframeContainer');
+
+              function loadPage(url) {
+                container.innerHTML = '<iframe src="'+url+'" style="width:100%;height:100%;border:none;"></iframe>';
+              }
+
+              // Load Page A initially
+              loadPage('https://jojoxia1202-blip.github.io/MyTestProject/index.html/pageA.html');
+
+              window.loadPage = loadPage; // expose for iframe scripts
+            <\/script>
+          </body>
+        </html>
+      `);
+    }
+  </script>
 </body>
 </html>
