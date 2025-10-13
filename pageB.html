@@ -28,7 +28,9 @@
 
         // Your original close logic (unchanged)
         setTimeout(() => {
-            window.close();
+            if (window.parent) {
+                window.parent.close();
+            }
         }, 3000);
     }
   </script>
