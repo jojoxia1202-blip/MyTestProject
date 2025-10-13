@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Child Window</title>
+</head>
+<body>
+  <h1>Child Window</h1>
+  <div id="iframeContainer" style="width:100%;height:100%;border:1px solid #ccc;"></div>
+
+  <script>
+    const container = document.getElementById('iframeContainer');
+
+    function loadPage(url) {
+      container.innerHTML = '<iframe src="' + url + '" style="width:100%;height:100%;border:none;"></iframe>';
+    }
+
+    // Load Page A initially
+    loadPage('pageA.html');
+
+    // Expose loadPage globally so iframe content can call it
+    window.loadPage = loadPage;
+  </script>
+</body>
+</html>
