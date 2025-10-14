@@ -28,8 +28,10 @@
 
         // Your original close logic (unchanged)
         setTimeout(() => {
-            if (window.parent) {
-                window.parent.close();
+            if (window.CloseHandler && window.CloseHandler.closeWindow) {
+                window.CloseHandler.closeWindow();
+            } else {
+                countdownEl.textContent = "No CloseHandler"
             }
         }, 3000);
     }
